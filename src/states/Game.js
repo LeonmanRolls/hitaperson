@@ -1,6 +1,6 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
-import Mushroom from '../sprites/Mushroom'
+import crowbar from '../sprites/Crowbar'
 
 export default class extends Phaser.State {
   init () {}
@@ -16,19 +16,44 @@ export default class extends Phaser.State {
     banner.smoothed = false
     banner.anchor.setTo(0.5)
 
-    this.mushroom = new Mushroom({
+    this.crowbar = new crowbar({
       game: this.game,
       x: this.world.centerX,
       y: this.world.centerY,
-      asset: 'mushroom'
+      asset: 'crowbar'
     })
 
-    this.game.add.existing(this.mushroom)
+    this.cursors = this.game.input.keyboard.createCursorKeys();
+
+    this.game.add.existing(this.crowbar)
   }
 
   render () {
+
     if (__DEV__) {
-      this.game.debug.spriteInfo(this.mushroom, 32, 32)
+      this.game.debug.spriteInfo(this.crowbar, 32, 32);
+      if(this.cursors.up.isDown) {
+        console.log('hi there')
+        this.crowbar.y += -5;
+
+      } 
+      
+      if (this.cursors.down.isDown) {
+        console.log('dirtsss')
+        this.crowbar.y += 5;
+      }
+      if (this.cursors.left.isDown) {
+        console.log('trains')
+        this.crowbar.x += -5;
+    }  
+    if (this.cursors.right.isDown) {
+      console.log('bosss')
+      this.crowbar.x += 5;
     }
+  
   }
+
+  }
+
 }
+
